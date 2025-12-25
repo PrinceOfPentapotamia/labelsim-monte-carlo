@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabelSim: Investment Intelligence</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Control Panel -->
+        <aside class="control-panel">
+            <header>
+                <div class="logo">LabelSim</div>
+                <p class="subtitle">Monte Carlo Investment Engine</p>
+            </header>
+
+            <form id="simulationForm">
+                <div class="input-group">
+                    <label for="genreSelect">Genre / Artist Profile</label>
+                    <select id="genreSelect">
+                        <option value="pop">Pop (Broad, High Variance)</option>
+                        <option value="hiphop">Hip-Hop (High Streaming)</option>
+                        <option value="rock">Rock / Metal (High Loyalty)</option>
+                        <option value="indie">Indie / Alternative (Steady)</option>
+                        <option value="custom" selected>Custom / Manual</option>
+                    </select>
+                    <span class="help-text">Auto-fills assumptions below</span>
+                </div>
+
+                <div class="section-title">Historical Data (The Prior)</div>
+                <div class="input-group">
+                    <label for="socialFollowers">Total Social Followers</label>
+                    <input type="number" id="socialFollowers" value="500000" step="1000">
+                    <span class="help-text">Instagram + TikTok + Twitter</span>
+                </div>
+                <div class="input-group">
+                    <label for="prevStreams">Prev. Album Streams</label>
+                    <input type="number" id="prevStreams" value="10000000" step="10000">
+                    <span class="help-text">Lifetime streams of last project</span>
+                </div>
+
+                <div class="section-title">Investment (The Bet)</div>
+                <div class="input-group">
+                    <label for="advance">Artist Advance ($)</label>
+                    <input type="number" id="advance" value="50000" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="marketing">Marketing Budget ($)</label>
+                    <input type="number" id="marketing" value="25000" step="1000">
+                </div>
+                <div class="input-group">
+                    <label for="contentBudget">Video & Content ($)</label>
+                    <input type="number" id="contentBudget" value="15000" step="1000">
+                </div>
+
+                <div class="section-title">Simulation Settings</div>
+                <div class="input-group">
+                    <label for="iterations">Iterations</label>
+                    <select id="iterations">
+                        <option value="1000">1,000 runs</option>
+                        <option value="5000" selected>5,000 runs</option>
+                        <option value="10000">10,000 runs</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="run-btn">Run Simulation</button>
+            </form>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- KPIs -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <h3>Median Revenue</h3>
+                    <div class="value" id="medianRevenue">$0</div>
+                    <div class="indicator">Projected Gross</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Median ROI</h3>
+                    <div class="value" id="medianROI">0%</div>
+                    <div class="indicator">Return on Investment</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Break-Even Probability</h3>
+                    <div class="value" id="breakEvenProb">0%</div>
+                    <div class="indicator">Chance of Profit > $0</div>
+                </div>
+                <div class="kpi-card risk">
+                    <h3>Value at Risk (95%)</h3>
+                    <div class="value" id="var95">$0</div>
+                    <div class="indicator">Worst 5% Outcome</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-container glass-panel">
+                <canvas id="distributionChart"></canvas>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-container glass-panel half">
+                    <canvas id="roiScatterChart"></canvas>
+                </div>
+                <div class="stats-panel glass-panel half">
+                    <h4>Simulation Insights</h4>
+                    <ul id="insightsList">
+                        <li>Run the simulation to see insights.</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="simulation.js"></script>
+</body>
+
+</html>
